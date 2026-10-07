@@ -1,0 +1,388 @@
+/* ==========================================================================
+   SMILECARE DENTAL STUDIO - RESPONSIVE STYLESHEET
+   Flawless presentation on Desktop (1440px, 1280px), Tablet (1024px, 768px),
+   and Mobile Devices (414px, 390px, 375px)
+   ========================================================================== */
+
+/* --- 1. LARGE DESKTOP & STANDARD SCREENS (<= 1280px) --- */
+@media (max-width: 1280px) {
+  :root {
+    --container-max-w: 1140px;
+  }
+
+  .hero-grid {
+    gap: 48px;
+  }
+
+  .treatments-grid {
+    gap: 22px;
+  }
+
+  .experience-grid {
+    gap: 18px;
+  }
+
+  .statement-grid,
+  .doctor-grid,
+  .featured-grid,
+  .contact-grid {
+    gap: 50px;
+  }
+}
+
+/* --- 2. TABLET LANDSCAPE & SMALL DESKTOP (<= 1024px) --- */
+@media (max-width: 1024px) {
+  /* Treatments switch to 2 columns */
+  .treatments-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Experience / Why choose us switches to 2x2 grid */
+  .experience-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Stats strip */
+  .stats-strip {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  /* Gallery adapts */
+  .gallery-item.aspect-wide {
+    grid-column: span 12;
+    aspect-ratio: 16 / 9;
+  }
+
+  .gallery-item.aspect-tall {
+    grid-column: span 6;
+    aspect-ratio: 4 / 5;
+  }
+
+  .gallery-item.aspect-standard {
+    grid-column: span 6;
+    aspect-ratio: 4 / 3;
+  }
+
+  /* Footer 4-col collapses to 2x2 */
+  .footer-top {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+  }
+
+  /* Navigation */
+  .nav-menu {
+    display: none; /* Collapses to mobile hamburger drawer */
+  }
+
+  .mobile-toggle {
+    display: flex;
+    align-items: center;
+  }
+
+  .nav-phone {
+    display: none;
+  }
+
+  .hero-floating-card {
+    left: 0;
+    bottom: 16px;
+  }
+}
+
+/* --- 3. TABLET PORTRAIT (<= 768px) --- */
+@media (max-width: 768px) {
+  /* Grid collapses to stacked editorial single-column */
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .hero-visual {
+    order: -1; /* Display heroic imagery prominently */
+    max-width: 520px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .hero-image-frame {
+    aspect-ratio: 16 / 11;
+    max-height: 380px;
+  }
+
+  .hero-floating-card {
+    position: static;
+    margin-top: 14px;
+    max-width: 100%;
+  }
+
+  .hero-content {
+    text-align: left;
+  }
+
+  .hero-trust-bar {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .statement-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .statement-visual {
+    order: -1;
+  }
+
+  .doctor-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .doctor-portrait-badge {
+    position: static;
+    margin-top: 16px;
+    display: inline-block;
+  }
+
+  .doctor-portrait-frame {
+    max-width: 440px;
+    margin: 0 auto;
+  }
+
+  .featured-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .featured-visual {
+    order: -1;
+  }
+
+  .appointment-banner {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    text-align: left;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .map-container-frame {
+    min-height: 300px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-group.full-width {
+    grid-column: span 1;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+  }
+
+  /* Lightbox buttons reposition on tablet */
+  .lightbox-btn {
+    width: 40px;
+    height: 40px;
+  }
+
+  .lightbox-prev {
+    left: 8px;
+  }
+
+  .lightbox-next {
+    right: 8px;
+  }
+}
+
+/* --- 4. MOBILE DEVICES (<= 540px, including 414px, 390px, 375px) --- */
+@media (max-width: 540px) {
+  :root {
+    --container-pad-x: 18px;
+    --section-pad-y: 60px;
+  }
+
+  /* Navigation adjustments */
+  .nav-container {
+    height: 68px;
+  }
+
+  .brand-title {
+    font-size: 1.15rem;
+  }
+
+  .brand-subtitle {
+    font-size: 0.6rem;
+  }
+
+  .brand-monogram {
+    width: 34px;
+    height: 34px;
+    font-size: 1.1rem;
+  }
+
+  .nav-actions .btn {
+    padding: 10px 16px;
+    font-size: 0.8rem;
+  }
+
+  /* Hero Section */
+  .hero-title {
+    font-size: 2.2rem;
+    line-height: 1.18;
+  }
+
+  .hero-cta-group {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .hero-cta-group .btn {
+    width: 100%;
+  }
+
+  .hero-trust-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  /* Treatments & Experience */
+  .treatments-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .experience-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .experience-card {
+    padding: 28px 22px;
+  }
+
+  /* Gallery Single Column on Mobile */
+  .gallery-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .gallery-item.aspect-wide,
+  .gallery-item.aspect-tall,
+  .gallery-item.aspect-standard {
+    grid-column: span 1;
+    aspect-ratio: 4 / 3;
+  }
+
+  /* Stats row becomes 2x2 with clear compact spacing */
+  .stats-strip {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+
+  .stat-number-wrap {
+    font-size: 2.2rem;
+  }
+
+  /* Statement features 1 col */
+  .statement-features {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  /* Testimonials */
+  .testimonial-card-inner {
+    padding: 28px 18px;
+  }
+
+  .testimonial-quote {
+    font-size: 1.18rem;
+  }
+
+  /* Appointment form */
+  .appointment-card-wrapper {
+    padding: 24px 18px;
+  }
+
+  .form-control {
+    padding: 12px 14px;
+    font-size: 0.9rem;
+  }
+
+  /* Footer 1 column on small screens */
+  .footer-top {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  /* Floating concierge button compact on mobile */
+  .floating-concierge-btn {
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 16px;
+    font-size: 0.78rem;
+  }
+
+  /* Disable hover zoom states on touch to prevent sticky hover states */
+  .treatment-card:hover {
+    transform: none;
+  }
+
+  .treatment-card:hover .treatment-img {
+    transform: none;
+  }
+
+  .experience-card:hover {
+    transform: none;
+  }
+
+  .statement-image-frame:hover img {
+    transform: none;
+  }
+
+  .featured-image-frame:hover img {
+    transform: none;
+  }
+
+  .gallery-overlay {
+    opacity: 1; /* Always show caption on mobile touch */
+    background: linear-gradient(180deg, transparent 40%, rgba(19, 21, 23, 0.8) 100%);
+  }
+}
+
+/* --- 5. COMPACT MOBILE SCREENS (375px) --- */
+@media (max-width: 375px) {
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .statement-heading {
+    font-size: 1.9rem;
+  }
+
+  .featured-title {
+    font-size: 2rem;
+  }
+
+  .appointment-banner-actions .btn {
+    width: 100%;
+  }
+
+  .contact-actions-row {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .contact-actions-row .btn {
+    width: 100%;
+  }
+}

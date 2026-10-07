@@ -1,0 +1,349 @@
+/* ==========================================================================
+   SMILECARE DENTAL STUDIO - PREMIUM ANIMATIONS & CINEMATIC PICTURE ENGINE
+   Silk Curtain Reveals • Parallax Depth • 3D Interactive Tilt • Letter Popups
+   ========================================================================== */
+
+/* --- 1. LUXURY TIMING CURVES --- */
+:root {
+  --ease-out-luxury: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-luxury: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-spring-subtle: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* --- 2. TOP SCROLL PROGRESS BAR --- */
+.scroll-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2.5px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--color-accent-gold) 0%, #E2CCA0 50%, var(--color-accent-gold) 100%);
+  z-index: 9999;
+  transition: width 0.08s linear;
+  box-shadow: 0 0 10px rgba(197, 162, 101, 0.6);
+  pointer-events: none;
+}
+
+/* --- 3. CINEMATIC PICTURE REVEAL & SHUTTER ENGINE --- */
+
+/* The Curtain Mask Frame */
+.img-curtain-reveal {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+  background-color: var(--color-bg-secondary);
+}
+
+/* Silky warm-stone wipe curtain */
+.img-curtain-reveal::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--color-bg-secondary) 0%, var(--color-bg-tertiary) 100%);
+  transform: translateY(0);
+  transition: transform 1.35s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 4;
+  pointer-events: none;
+}
+
+/* Champagne gold leading hairline */
+.img-curtain-reveal::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--color-accent-gold);
+  transform: translateY(0);
+  transition: transform 1.35s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 5;
+  pointer-events: none;
+}
+
+/* Curtain opens when revealed */
+.img-curtain-reveal.revealed::after,
+.revealed .img-curtain-reveal::after {
+  transform: translateY(-101%);
+}
+
+.img-curtain-reveal.revealed::before,
+.revealed .img-curtain-reveal::before {
+  transform: translateY(-100%);
+}
+
+/* Image inside the curtain frame: zooms from 1.22 down to 1.04 with crisp unmasking */
+.img-curtain-reveal img,
+.img-curtain-reveal .hero-main-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.22);
+  filter: brightness(0.88) contrast(1.05);
+  transition: transform 1.7s cubic-bezier(0.16, 1, 0.3, 1), filter 1.3s ease;
+  will-change: transform, filter;
+}
+
+.img-curtain-reveal.revealed img,
+.revealed .img-curtain-reveal img,
+.img-curtain-reveal.revealed .hero-main-img,
+.revealed .img-curtain-reveal .hero-main-img {
+  transform: scale(1.03);
+  filter: brightness(1) contrast(1);
+}
+
+/* Continuous Scroll Parallax on Images */
+.parallax-img {
+  will-change: transform;
+  transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Interactive 3D Perspective Tilt on Desktop */
+.tilt-card-3d {
+  transition: transform 0.4s var(--ease-out-luxury), box-shadow 0.4s var(--ease-out-luxury);
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+/* Soft Floating Picture Animation */
+@keyframes pictureFloatSlow {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.animate-float-picture {
+  animation: pictureFloatSlow 7s ease-in-out infinite;
+}
+
+/* --- 4. TREATMENT & GALLERY PICTURE ANIMATIONS ON SCROLL --- */
+.treatment-card .treatment-image-wrap {
+  overflow: hidden;
+  position: relative;
+  background-color: var(--color-bg-tertiary);
+}
+
+.treatment-card .treatment-img {
+  transform: scale(1.15);
+  filter: brightness(0.92);
+  transition: transform 1.4s var(--ease-out-luxury), filter 0.8s ease;
+  will-change: transform, filter;
+}
+
+.treatment-card.revealed .treatment-img {
+  transform: scale(1);
+  filter: brightness(1);
+}
+
+.treatment-card:hover .treatment-img {
+  transform: scale(1.08) !important;
+}
+
+/* Gallery Items Image Unmasking on Scroll */
+.gallery-item .gallery-thumb {
+  transform: scale(1.16);
+  filter: brightness(0.9);
+  transition: transform 1.4s var(--ease-out-luxury), filter 0.8s ease;
+  will-change: transform, filter;
+}
+
+.gallery-item.revealed .gallery-thumb {
+  transform: scale(1);
+  filter: brightness(1);
+}
+
+.gallery-item:hover .gallery-thumb {
+  transform: scale(1.07) !important;
+}
+
+/* --- 5. LETTER & WORD POPUP ANIMATION ENGINE --- */
+.split-word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  white-space: nowrap;
+  margin-right: 0.28em;
+  line-height: 1.2;
+}
+
+.split-char {
+  display: inline-block;
+  transform: translateY(115%) rotate(2deg);
+  opacity: 0;
+  transition: transform 0.85s var(--ease-out-luxury), opacity 0.75s ease;
+  will-change: transform, opacity;
+  transition-delay: calc(var(--char-delay, 0) * 0.024s);
+}
+
+.revealed .split-char,
+.popup-active .split-char,
+.revealed.split-char,
+.popup-active.split-char {
+  transform: translateY(0) rotate(0deg);
+  opacity: 1;
+}
+
+.split-word-block {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  margin-right: 0.24em;
+  line-height: 1.35;
+}
+
+.split-word-inner {
+  display: inline-block;
+  transform: translateY(112%);
+  opacity: 0;
+  transition: transform 0.8s var(--ease-out-luxury), opacity 0.75s ease;
+  will-change: transform, opacity;
+  transition-delay: calc(var(--word-delay, 0) * 0.045s);
+}
+
+.revealed .split-word-inner,
+.popup-active .split-word-inner {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* --- 6. HERO SECTION ENTRANCE ON LOAD --- */
+@keyframes heroFadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-hero-badge {
+  animation: heroFadeUp 0.9s var(--ease-out-luxury) 0.15s both;
+}
+
+.animate-hero-desc {
+  animation: heroFadeUp 1.1s var(--ease-out-luxury) 0.5s both;
+}
+
+.animate-hero-cta {
+  animation: heroFadeUp 1.1s var(--ease-out-luxury) 0.7s both;
+}
+
+.animate-hero-trust {
+  animation: heroFadeUp 1.1s var(--ease-out-luxury) 0.9s both;
+}
+
+.animate-hero-card {
+  animation: heroFadeUp 1.2s var(--ease-out-luxury) 0.85s both;
+}
+
+/* --- 7. SCROLL REVEAL UTILITY CLASSES --- */
+.reveal-init {
+  opacity: 0;
+  transform: translateY(34px);
+  transition: opacity 1s var(--ease-out-luxury), transform 1s var(--ease-out-luxury);
+  will-change: opacity, transform;
+}
+
+.reveal-init.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-card-pop {
+  opacity: 0;
+  transform: translateY(38px) scale(0.97);
+  transition: opacity 0.95s var(--ease-out-luxury), transform 0.95s var(--ease-out-luxury);
+  will-change: opacity, transform;
+}
+
+.reveal-card-pop.revealed {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.reveal-fade-left {
+  opacity: 0;
+  transform: translateX(-42px);
+  transition: opacity 1.1s var(--ease-out-luxury), transform 1.1s var(--ease-out-luxury);
+  will-change: opacity, transform;
+}
+
+.reveal-fade-left.revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-fade-right {
+  opacity: 0;
+  transform: translateX(42px);
+  transition: opacity 1.1s var(--ease-out-luxury), transform 1.1s var(--ease-out-luxury);
+  will-change: opacity, transform;
+}
+
+.reveal-fade-right.revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-zoom-in {
+  opacity: 0;
+  transform: scale(0.94);
+  transition: opacity 1.2s var(--ease-out-luxury), transform 1.2s var(--ease-out-luxury);
+  will-change: opacity, transform;
+}
+
+.reveal-zoom-in.revealed {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Stagger Delays */
+.delay-100 { transition-delay: 0.1s !important; }
+.delay-200 { transition-delay: 0.2s !important; }
+.delay-300 { transition-delay: 0.3s !important; }
+.delay-400 { transition-delay: 0.4s !important; }
+.delay-500 { transition-delay: 0.5s !important; }
+.delay-600 { transition-delay: 0.6s !important; }
+
+/* --- 8. REDUCED MOTION PREFERENCE (ACCESSIBILITY) --- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .split-char,
+  .split-word-inner,
+  .img-curtain-reveal::after,
+  .img-curtain-reveal::before,
+  .img-curtain-reveal img,
+  .parallax-img {
+    transform: none !important;
+    opacity: 1 !important;
+    transition: none !important;
+    filter: none !important;
+  }
+
+  .reveal-init,
+  .reveal-card-pop,
+  .reveal-fade-left,
+  .reveal-fade-right,
+  .reveal-zoom-in {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .scroll-progress-bar {
+    display: none !important;
+  }
+}
